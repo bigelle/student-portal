@@ -1,0 +1,18 @@
+syntax = "proto3";  
+option go_package = "github.com/bigelle/student-portal/proto/auth";
+
+message LoginRequest {
+  string name = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string name = 1;
+  int32 user_id = 2;
+  string session = 3;
+  string csrf = 4; 
+}
+
+service Auth {
+  rpc Login(LoginRequest) returns (LoginResponse);
+}
