@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"net"
+	"os"
 
 	"github.com/bigelle/student-portal/proto/auth"
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
@@ -23,7 +26,15 @@ func (s authService) Login(context.Context, *auth.LoginRequest) (*auth.LoginResp
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":8081")
+	env := flag.String("env", "", "set dot env for this program")
+	flag.Parse()
+	log.Println(*env)
+	err := godotenv.Load(*env)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	lis, err := net.Listen("tcp", os.Getenv("AUTH_SERVICE_ADDR"))
 	if err != nil {
 		log.Fatal(err)
 	}

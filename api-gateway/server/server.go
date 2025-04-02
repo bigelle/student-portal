@@ -1,45 +1,29 @@
-package main
+package server
 
 import (
+	"fmt"
+
+	"github.com/bigelle/student-portal/api-gateway/handlers"
+	"github.com/bigelle/student-portal/proto/auth"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"google.golang.org/grpc"
 )
 
-func SetupRoutes(r *echo.Echo) {
-	r.Use(middleware.Logger())
-	r.Use(middleware.Recover())
+func SetupGroup(g *echo.Group, group string, conn *grpc.ClientConn) error {
+	switch group {
+	case "/auth":
+		setupAuth(g, conn)
+		return nil
 
-	g := r.Group("/api")
+	default:
+		return fmt.Errorf("unexpected group: %s", group)
+	}
+}
 
-	// TODO
-	auth := g.Group("/auth")
-	_ = auth
+func setupAuth(g *echo.Group, conn *grpc.ClientConn) {
+	authClient := auth.NewAuthClient(conn)
+	h := handlers.AuthHandler{AuthClient: authClient}
 
-	// TODO
-	tasks := g.Group("/tasks")
-	_ = tasks
-
-	// TODO
-	tests := g.Group("/test")
-	_ = tests
-
-	// TODO
-	docs := g.Group("/docs")
-	_ = docs
-
-	// TODO
-	lib := g.Group("/library")
-	_ = lib
-
-	// TODO
-	grades := g.Group("/grades")
-	_ = grades
-
-	// TODO
-	news := g.Group("/news")
-	_ = news
-
-	// TODO
-	calendar := g.Group("/calendar")
-	_ = calendar
+	au := g.Group("/auth")
+	au.GET("/login", h.HandleLogin)
 }
