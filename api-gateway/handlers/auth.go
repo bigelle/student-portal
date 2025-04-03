@@ -30,5 +30,10 @@ func (h *AuthHandler) HandleLogin(c echo.Context) error {
 	if err != nil {
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusOK, resp)
+
+	return c.JSON(http.StatusOK, schemas.LoginResponse{
+		Name: resp.Name,
+		ID:   resp.UserId,
+		Role: resp.Role,
+	})
 }

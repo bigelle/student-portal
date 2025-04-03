@@ -25,5 +25,5 @@ func setupAuth(g *echo.Group, conn *grpc.ClientConn) {
 	h := handlers.AuthHandler{AuthClient: authClient}
 
 	au := g.Group("/auth")
-	au.GET("/login", h.HandleLogin)
+	au.POST("/login", h.HandleLogin)
 }

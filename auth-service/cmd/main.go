@@ -1,29 +1,16 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"log"
 	"net"
 	"os"
 
+	"github.com/bigelle/student-portal/auth-service/handlers"
 	"github.com/bigelle/student-portal/proto/auth"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
-
-type authService struct {
-	auth.UnimplementedAuthServer
-}
-
-func (s authService) Login(context.Context, *auth.LoginRequest) (*auth.LoginResponse, error) {
-	return &auth.LoginResponse{
-		Name:    "it works",
-		UserId:  42,
-		Session: "session",
-		Csrf:    "csrf",
-	}, nil
-}
 
 func main() {
 	env := flag.String("env", "", "set dot env for this program")
@@ -40,7 +27,7 @@ func main() {
 	}
 
 	server := grpc.NewServer()
-	service := &authService{}
+	service := &handlers.AuthService{}
 
 	auth.RegisterAuthServer(server, service)
 	if err := server.Serve(lis); err != nil {
