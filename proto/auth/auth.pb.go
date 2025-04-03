@@ -77,8 +77,9 @@ type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	UserId        int32                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Session       string                 `protobuf:"bytes,3,opt,name=session,proto3" json:"session,omitempty"`
-	Csrf          string                 `protobuf:"bytes,4,opt,name=csrf,proto3" json:"csrf,omitempty"`
+	Role          string                 `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
+	Session       string                 `protobuf:"bytes,4,opt,name=session,proto3" json:"session,omitempty"`
+	Csrf          string                 `protobuf:"bytes,5,opt,name=csrf,proto3" json:"csrf,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,6 +128,13 @@ func (x *LoginResponse) GetUserId() int32 {
 	return 0
 }
 
+func (x *LoginResponse) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
 func (x *LoginResponse) GetSession() string {
 	if x != nil {
 		return x.Session
@@ -149,12 +157,13 @@ const file_auth_proto_rawDesc = "" +
 	"auth.proto\">\n" +
 	"\fLoginRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"j\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\"~\n" +
 	"\rLoginResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x18\n" +
-	"\asession\x18\x03 \x01(\tR\asession\x12\x12\n" +
-	"\x04csrf\x18\x04 \x01(\tR\x04csrf2.\n" +
+	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x12\n" +
+	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
+	"\asession\x18\x04 \x01(\tR\asession\x12\x12\n" +
+	"\x04csrf\x18\x05 \x01(\tR\x04csrf2.\n" +
 	"\x04Auth\x12&\n" +
 	"\x05Login\x12\r.LoginRequest\x1a\x0e.LoginResponseB.Z,github.com/bigelle/student-portal/proto/authb\x06proto3"
 

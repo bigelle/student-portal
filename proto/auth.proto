@@ -9,8 +9,9 @@ message LoginRequest {
 message LoginResponse {
   string name = 1;
   int32 user_id = 2;
-  string session = 3;
-  string csrf = 4; 
+  string role = 3;
+  string session = 4;
+  string csrf = 5; 
 }
 
 service Auth {
