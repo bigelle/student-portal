@@ -124,7 +124,9 @@ func (x *RegisterRequest) GetSpecialization() string {
 type RegisterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ok            bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
-	NewLogin      string                 `protobuf:"bytes,2,opt,name=new_login,json=newLogin,proto3" json:"new_login,omitempty"`
+	UserId        int32                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	NewLogin      string                 `protobuf:"bytes,3,opt,name=new_login,json=newLogin,proto3" json:"new_login,omitempty"`
+	Role          string                 `protobuf:"bytes,4,opt,name=role,proto3" json:"role,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -166,9 +168,23 @@ func (x *RegisterResponse) GetOk() bool {
 	return false
 }
 
+func (x *RegisterResponse) GetUserId() int32 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 func (x *RegisterResponse) GetNewLogin() string {
 	if x != nil {
 		return x.NewLogin
+	}
+	return ""
+}
+
+func (x *RegisterResponse) GetRole() string {
+	if x != nil {
+		return x.Role
 	}
 	return ""
 }
@@ -317,10 +333,12 @@ const file_auth_proto_rawDesc = "" +
 	"\fphone_number\x18\x05 \x01(\tR\vphoneNumber\x12\x14\n" +
 	"\x05email\x18\x06 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\a \x01(\tR\bpassword\x12&\n" +
-	"\x0especialization\x18\b \x01(\tR\x0especialization\"?\n" +
+	"\x0especialization\x18\b \x01(\tR\x0especialization\"l\n" +
 	"\x10RegisterResponse\x12\x0e\n" +
-	"\x02ok\x18\x01 \x01(\bR\x02ok\x12\x1b\n" +
-	"\tnew_login\x18\x02 \x01(\tR\bnewLogin\">\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x1b\n" +
+	"\tnew_login\x18\x03 \x01(\tR\bnewLogin\x12\x12\n" +
+	"\x04role\x18\x04 \x01(\tR\x04role\">\n" +
 	"\fLoginRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"~\n" +

@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/bigelle/student-portal/proto v0.0.0-20250403074822-d71cf441c9a7
+	github.com/bigelle/student-portal/proto v0.0.0-20250403114235-43ab4c63cea1
 	github.com/joho/godotenv v1.5.1
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect

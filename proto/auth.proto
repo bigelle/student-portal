@@ -14,7 +14,9 @@ message RegisterRequest {
 
 message RegisterResponse {
   bool ok = 1;
-  string new_login = 2;
+  int32 user_id = 2;
+  string new_login = 3;
+  string role = 4;
 }
 
 message LoginRequest {
